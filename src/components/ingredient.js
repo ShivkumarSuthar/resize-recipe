@@ -15,29 +15,29 @@ function Ingredient({ qty, type, name, onQtyChange, onTypeChange, onNameChange }
 
   useEffect(() => {
     const data = PickType["Pick Type"];
-    setPickTypes(data); // Set the state with the received data
+    setPickTypes(data); 
   }, []);
 
 
   return (
-    <table className="flex flex-col items-center py- border-t-2">
+    <table className="flex flex-col items-center py- border-t-2 ">
       <tbody className="py-3">
-        <tr>
-          <td>
+        <tr className="w-100">
+          <td className="w-1/2">
             <input
               type="text"
-              className="border-2 border-slate-700 w-16 py-2 px-2"
+              className="border-2 border-slate-700 py-2 px-2 w-100"
               placeholder="QTY"
               value={qty} 
               onChange={(e)=>onQtyChange(e.target.value)}
             //   pattern=".*\d+.*" i will do later
             />
           </td>
-          <td>
+          <td className="w-100">
             <select
               value={type}
               onChange={(e) => onTypeChange(e.target.value)}
-              className="border-2 border-slate-700 py-2 mx-2 w-[200px] "
+              className="border-2 border-slate-700 py-2 mx-2  "
             >
               <option value="">Select Type</option>
 
@@ -58,10 +58,10 @@ function Ingredient({ qty, type, name, onQtyChange, onTypeChange, onNameChange }
               ))}
             </select>
           </td>
-          <td>
+          <td className="w-1/3">
             <input
               type="text"
-              className="border-2 border-slate-700 w-[400px] py-2 px-2"
+              className="border-2 border-slate-700  py-2 px-2 "
               placeholder="Ingredient Name"
               value={name}
               onChange={(e)=>onNameChange(e.target.value)}
