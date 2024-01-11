@@ -1,0 +1,7 @@
+{
+    "Pick Type": {
+      "Dry": ["Cups", "Dashes", "Ounces", "Pinches", "Tablespoons", "Pounds", "Each"],
+      "Liquids": ["Cups", "Gallons", "Ounces"]
+    }
+  }
+  
