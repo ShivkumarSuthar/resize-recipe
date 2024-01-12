@@ -1,7 +1,16 @@
 {
-    "Pick Type": {
-      "Dry": ["Cups", "Dashes", "Ounces", "Pinches", "Tablespoons", "Pounds", "Each"],
-      "Liquids": ["Cups", "Gallons", "Ounces"]
-    }
+  "Pick Type": {
+    "Dry": [
+      "gm",
+      "kg",
+      "Cups",
+      "Dashes",
+      "Ounces",
+      "Pinches",
+      "Tablespoons",
+      "Pounds",
+      "Each"
+    ],
+    "Liquids": ["Cups", "Gallons", "Ounces"]
   }
-  
+}

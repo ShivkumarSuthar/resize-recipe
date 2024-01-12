@@ -3,31 +3,23 @@ import React, { useCallback, useEffect, useState } from "react";
 import Ingredient from "./ingredient";
 
 function Recipe() {
-  //   hooks for recipe name
+  const initialIngredients = [
+    { qty: "", type: "", name: "" },
+    // { qty: "", type: "", name: "" },
+    // { qty: "", type: "", name: "" },
+    // { qty: "", type: "", name: "" },
+  ];
+
+  // type logic
+  const types = ["kg", "gm"];
+
   const [name, setName] = useState("");
-
-  //   hooks for Notes
   const [notes, setNotes] = useState("");
-
-  //   hooks for Original Serves
   const [originalServe, setOriginalServe] = useState("");
-
-  //   hooks for Need to  Serves
   const [needServe, setneedServe] = useState("");
-
-  //hook for Radio imperial
   const [imperial, setImperial] = useState(false);
-
-  //hook for Radio imperial
   const [metric, setMetric] = useState(false);
-
-  // State for ingredients
-  const [ingredients, setIngredients] = useState([
-    { qty: "", type: "", name: "" },
-    { qty: "", type: "", name: "" },
-    { qty: "", type: "", name: "" },
-    { qty: "", type: "", name: "" },
-  ]);
+  const [ingredients, setIngredients] = useState(initialIngredients);
 
   function handleQtyChange(index, newQty) {
     const updatedIngredients = [...ingredients];
@@ -47,36 +39,36 @@ function Recipe() {
     setIngredients(updatedIngredients);
   }
 
-  
+  // function resize() {
+  //   setIngredients((prevIngredients) =>
+  //     prevIngredients.map((item) => ({
+  //       qty: Number(item.qty) * Number(needServe),
+  //       type: ,
+  //       name: item.name,
+  //     }))
+  //   );
+  // }
 
-  // Function to handle click
-  const handleClick = () => {
-    console.log("Ingredients:");
-    ingredients.forEach((item) => {
-      console.log("Name:", item.name);
-      console.log("Qty:", item.qty);
-      console.log("Type:", item.type);
-    });
-  };
-  function resize() {
-    setIngredients((prevIngredients) =>
-      prevIngredients.map((item) => ({
+  function resize(_e, index = 0) {
+    const { qty: prevQuantity, type, name } = ingredients[index];
+    let updatedQuantity = Number(prevQuantity) * Number(needServe);
+    let updatedType = type;
 
+    if (updatedType === "gm" && updatedQuantity > 1000) {
+      updatedQuantity = Math.round(updatedQuantity / 1000);
+      updatedType = "kg";
+    }
 
-        qty: Number(item.qty) * Number(needServe),
-        type: ((item.type==="Ounces") || item.qty>1 )?(item.type="Tablespoons"):
-        (item.qty%8===0)?(item.type="Cups"):"" ,
-        name: item.name,
-      }))
-    );
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index] = {
+      ...updatedIngredients[0],
+      qty: updatedQuantity,
+      type: updatedType,
+    };
+    setIngredients(updatedIngredients);
   }
   function clear() {
-    setIngredients([
-      { qty: "", type: "", name: "" },
-      { qty: "", type: "", name: "" },
-      { qty: "", type: "", name: "" },
-      { qty: "", type: "", name: "" },
-    ]);
+    setIngredients(initialIngredients);
   }
 
   function addIngredients() {
@@ -135,11 +127,10 @@ function Recipe() {
                     value={originalServe}
                     onChange={(e) => setOriginalServe(e.target.value)}
                   />
-                 
                 </fieldset>
                 <div className="flex items-center">
-                    <span className="text-3xl mt-8">{">"}</span>
-                  </div>
+                  <span className="text-3xl mt-8">{">"}</span>
+                </div>
                 <fieldset className="flex-col flex mt-4 ">
                   <label htmlFor="" className="">
                     Needs to Serve
@@ -252,4 +243,4 @@ function Recipe() {
   );
 }
 
-export default Recipe;  
+export default Recipe;
